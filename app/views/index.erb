@@ -1,9 +1,6 @@
 <div class='container'>
   <div class ='summary'>
     <h1>BLACKJACK</h1>
-    <% if @errors %>
-      <p class='errors'><%= @errors %></p>
-    <% end %>
     <form id='start-button' action='#'>
       <input type='submit' value='play blackjack'>
     </form>
@@ -15,9 +12,10 @@
   </div>
   <div class ='play-area'>
     <form id='player-bet-form' class='hidden' action='#'>
-      <label name='bet'>Bet: </label>
-      <input type='text' name='bet' placeholder='enter bet'>
+      <input id ='bet-input' type='text' name='bet' placeholder='bet'>
       <input type='submit' value='deal'>
     </form>
   </div>
+</div>
+<div class ='errors'>
 </div>

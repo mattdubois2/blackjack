@@ -10,7 +10,7 @@ var App = {
     $('#player-setup-form').removeClass('hidden')
   },
   play: function() {
-    $('#player-setup-form').addClass('hidden')
+
     // console.log($('#player-setup-form').serialize());
     var request = $.ajax({
       url: '/players',
@@ -21,8 +21,14 @@ var App = {
 
     request.done(function(response){
       // console.log(response)
-      $('.summary').append(playerInfoTemp(response))
-      $('#player-bet-form').removeClass('hidden')
+      if (response.errors !== undefined){
+        $('.errors').append("<p>" + response.errors + "</p>")
+      }
+      else {
+        $('.summary').append(playerInfoTemp(response))
+        $('#player-setup-form').addClass('hidden')
+        $('#player-bet-form').removeClass('hidden')
+      }
     });
 
   }
