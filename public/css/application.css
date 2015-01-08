@@ -1,0 +1,33 @@
+.container {
+  margin: 20px auto;
+  width: 600px;
+  height: 400px;
+  padding: 0px 20px 20px 20px;
+  border: 1px solid black;
+  background-color: #FFE9BD;
+}
+
+h1 {
+  font-family: ‘Lucida Console’;
+  text-align: center;
+  margin: 5px 0px;
+}
+
+form {
+  text-align: center;
+}
+
+.errors {
+  color: red;
+}
+
+.hidden {
+  display: none;
+}
+
+#player-info {
+  font-family: '‘Lucida Console';
+  text-align: center;
+  margin: 0px 0px;
+  font-size: 150%;
+}
