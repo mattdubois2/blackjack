@@ -17,15 +17,23 @@
       <input id = 'bet-button' type='submit' value='deal'>
     </form>
     <p id='current-bet'></p>
-    <div id='player-hand'>
-      <h4 id='player-total'></h4>
-      <div id='player-cards'></div>
+    <p id='current-bet-number'></p>
+    <div id='player-hand' class='hand'>
+      <h3>You</h3>
+      <h4 id='player-total' class='total'></h4>
+      <div id='player-cards' class='card'></div>
     </div>
-    <div id='dealer-hand'>
-      <h4 id='dealer-total'></h4>
-      <div id='dealer-cards'></div>
+    <div id='dealer-hand' class='hand'>
+      <h3>Dealer</h3>
+      <h4 id='dealer-total' class='total'></h4>
+      <div id='dealer-cards' class='card'></div>
     </div>
   </div>
+</div>
+<div class='controls hidden'>
+  <form id='hit' action="#"><input type="submit" value='hit'></form>
+  <form id='stay' action="#"><input type="submit" value='stay'></form><br>
+  <form id='redeal' action="#"><input type="submit" value='re-deal'></form>
 </div>
 <div class ='errors'>
 </div>

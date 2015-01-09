@@ -49,14 +49,20 @@ var App = {
       }
       else {
         $('#player-bet-form').addClass('hidden')
+        console.log(response)
         $('#player-info').text(playerInfoTemp(response))
-        $('#current-bet').text("Betting $"+ response.bet)
-        App.deal()
+        $('#current-bet').text("Bet")
+        $('#current-bet-number').text(response.bet)
+        App.deal("player")
+        App.deal("dealer")
+        App.deal("player")
+        App.deal("dealer")
+        $('.controls').removeClass('hidden')
       }
     });
   },
 
-  deal: function() {
+  deal: function(cardGetter) {
     var dealRequest = $.ajax({
       url: '/deal',
       method: 'get',
@@ -64,8 +70,65 @@ var App = {
     });
 
     dealRequest.done(function(response){
-      console.log(response)
+      $("#"+cardGetter+"-cards").append(cardInfoTemp(response))
+      var currentTotal = $("#"+cardGetter+"-total").text();
+      if (currentTotal === ""){
+        currentTotal = response.value;
+      }
+      else {
+        currentTotal =  parseInt(currentTotal)
+        currentTotal += response.value;
+      }
+      $("#"+cardGetter+"-total").text(currentTotal)
+      return currentTotal
     })
+  },
+
+  hit: function(){
+    App.deal("player");
+  },
+
+  stay: function(playerScore, dealerScore){
+    if (dealerScore < 17){
+
+      // var dealerScore = App.deal("dealer")
+      App.deal('dealer')
+      // console.log(dealerScore)
+      // var dealerScore = $("#dealer-total").text();
+      // dealerScore = parseInt(dealerScore)
+      // console.log(dealerScore)
+    }
+    else {
+      if (dealerScore === playerScore){
+        console.log('push')
+      }
+      else if (playerScore > dealerScore){
+        console.log('win')
+        var winRequest = $.ajax({
+          url: '/win',
+          method: 'post',
+          dataType: 'json',
+          data: {bet: $('#current-bet-number').text()}
+        })
+        winRequest.done(function(response){
+          $('#player-info').text(playerInfoTemp(response))
+        })
+        App.reset()
+      }
+      else {
+        console.log('lose')
+      }
+    }
+
+  },
+
+  reset: function(){
+    $('#player-bet-form').removeClass('hidden')
+    $('.card').empty()
+    $('.total').empty()
+    $('#current-bet').empty()
+    $('#current-bet-number').empty()
+    // $('#current-bet').addClass('hidden')
   }
 }
 
@@ -86,5 +149,22 @@ $(document).ready(function() {
   $('#player-bet-form').on('submit', function(e){
     e.preventDefault();
     App.bet();
+  })
+
+  $('#hit').on('submit', function(e){
+    e.preventDefault;
+    App.hit();
+  })
+
+  $('#redeal').on('submit', function(e){
+    e.preventDefault;
+    App.reset();
+  })
+
+  $('#stay').on('submit', function(e){
+    e.preventDefault;
+    var playerScore = parseInt($("#player-total").text());
+    var dealerScore = parseInt($("#dealer-total").text());
+    App.stay(playerScore, dealerScore);
   })
 });

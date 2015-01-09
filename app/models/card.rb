@@ -1,7 +1,10 @@
 class Card < ActiveRecord::Base
-  after_initialize :default_played
+  # before_save :default_played, on: :create
 
-  def default_played
-    self.played = 0
+  # def default_played
+  #   self.played = false
+  # end
+  def self.reset
+    self.update_all(played: false)
   end
 end

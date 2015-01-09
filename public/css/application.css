@@ -46,3 +46,58 @@ form {
   font-size: 110%;
   margin: 5px;
 }
+
+#current-bet-number {
+  text-align: center;
+  font-size: 110%;
+  margin: 0px;
+}
+
+.hand {
+  margin-top: 15%;
+  float: left;
+  border: 1px dashed red;
+  text-align: center;
+  width: 100px;
+  height: 150px;
+}
+
+.hand h3 {
+  margin: 2px;
+}
+
+#player-hand {
+  margin-left: 20%;
+}
+
+#dealer-hand {
+  margin-left: 26%;
+}
+
+.total {
+  color: purple;
+  margin: 2px;
+}
+
+.card {
+  margin: 2px;
+}
+
+.controls {
+  text-align: center;
+}
+.controls form {
+  text-align: center;
+  display: inline-block;
+}
+
+.controls input {
+  width: 50px;
+}
+
+#redeal input{
+  width: 100px;
+}
+
+
+
