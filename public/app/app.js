@@ -1,4 +1,6 @@
-var playerInfoTemp = _.template("<p id='player-info'>Name: <%= name %> --- Bankroll: $<%= bankroll %> </p>");
+var playerInfoTemp = _.template("Name: <%= name %> --- Bankroll: $<%= bankroll %>");
+
+var cardInfoTemp = _.template("<p><%= name %> <%= suit %></p>");
 
 var App = {
 
@@ -25,7 +27,7 @@ var App = {
         $('.errors').prepend("<p>" + response.errors + "</p>")
       }
       else {
-        $('.summary').append(playerInfoTemp(response))
+        $('#player-info').text(playerInfoTemp(response))
         $('#player-setup-form').addClass('hidden')
         $('#player-bet-form').removeClass('hidden')
       }
@@ -33,25 +35,37 @@ var App = {
 
   },
 
-  deal: function() {
-    var dealRequest = $.ajax({
-      url: '/deal',
+  bet: function() {
+    var betRequest = $.ajax({
+      url: '/bet',
       method: 'post',
       dataType: 'json',
       data: $('#player-bet-form').serialize(),
     });
 
-    dealRequest.done(function(response){
-      console.log("this");
+    betRequest.done(function(response){
       if (response.errors !== undefined){
         $('.errors').prepend("<p>" + response.errors + "</p>")
       }
       else {
         $('#player-bet-form').addClass('hidden')
         $('#player-info').text(playerInfoTemp(response))
-        $('.play-area').append("<p>Betting $"+ response.bet +"</p>")
+        $('#current-bet').text("Betting $"+ response.bet)
+        App.deal()
       }
     });
+  },
+
+  deal: function() {
+    var dealRequest = $.ajax({
+      url: '/deal',
+      method: 'get',
+      dataType: 'json'
+    });
+
+    dealRequest.done(function(response){
+      console.log(response)
+    })
   }
 }
 
@@ -71,6 +85,6 @@ $(document).ready(function() {
 
   $('#player-bet-form').on('submit', function(e){
     e.preventDefault();
-    App.deal();
+    App.bet();
   })
 });

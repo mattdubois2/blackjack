@@ -4,6 +4,7 @@ class CreateCards < ActiveRecord::Migration
       t.string :suit
       t.string :name
       t.integer :value
+      t.binary :played
       t.timestamps
     end
   end

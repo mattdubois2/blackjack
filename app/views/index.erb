@@ -11,10 +11,20 @@
     </form>
   </div>
   <div class ='play-area'>
+    <p id='player-info'></p>
     <form id='player-bet-form' class='hidden' action='#'>
       <input id ='bet-input' type='text' name='bet' placeholder='bet'>
       <input id = 'bet-button' type='submit' value='deal'>
     </form>
+    <p id='current-bet'></p>
+    <div id='player-hand'>
+      <h4 id='player-total'></h4>
+      <div id='player-cards'></div>
+    </div>
+    <div id='dealer-hand'>
+      <h4 id='dealer-total'></h4>
+      <div id='dealer-cards'></div>
+    </div>
   </div>
 </div>
 <div class ='errors'>

@@ -13,7 +13,7 @@ post '/players' do
   end
 end
 
-post '/deal' do
+post '/bet' do
   player = Player.find(session[:player_id])
   bet = params[:bet].to_i
 
@@ -24,6 +24,11 @@ post '/deal' do
     player.save
     player.attributes.merge({bet: bet}).to_json
   end
+end
+
+get '/deal' do
+  card = Card.all.sample
+  card.to_json
 end
 
 get '/session' do

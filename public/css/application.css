@@ -8,6 +8,7 @@
   border-bottom-right-radius: 400px;
   border-bottom-left-radius: 400px;
   background-color: #71c47c;
+  font-family: 'Lucida Console';
 }
 
 h1 {
@@ -30,7 +31,6 @@ form {
 }
 
 #player-info {
-  font-family: 'Lucida Console';
   text-align: center;
   margin: 0px 0px;
   font-size: 150%;
@@ -39,4 +39,10 @@ form {
 #bet-input {
   width: 50px;
   text-align: center;
+}
+
+#current-bet {
+  text-align: center;
+  font-size: 110%;
+  margin: 5px;
 }
